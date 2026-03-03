@@ -23,7 +23,7 @@ public class MouseRecorder {
     public const int VK_LBUTTON = 0x01;
     public const int VK_RBUTTON = 0x02;
     public const int VK_MBUTTON = 0x04;
-    public const int VK_E = 0x45;
+    public const int VK_SPACE = 0x20;
 }
 "@
 
@@ -37,11 +37,11 @@ $prevRight = $false
 $prevMiddle = $false
 
 # Clear any stale key state
-[MouseRecorder]::GetAsyncKeyState([MouseRecorder]::VK_E) | Out-Null
+[MouseRecorder]::GetAsyncKeyState([MouseRecorder]::VK_SPACE) | Out-Null
 
 while ($true) {
     # Check for E key to stop
-    $eState = [MouseRecorder]::GetAsyncKeyState([MouseRecorder]::VK_E)
+    $eState = [MouseRecorder]::GetAsyncKeyState([MouseRecorder]::VK_SPACE)
     if ($eState -band 0x8000) { break }
 
     $point = New-Object MouseRecorder+POINT

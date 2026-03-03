@@ -57,7 +57,7 @@ func _on_play_pressed() -> void:
 func _start_recording() -> void:
 	state = State.RECORDING
 	countdown_label.visible = false
-	status_label.text = "RECORDING  (press E to stop)"
+	status_label.text = "RECORDING  (press Space to stop)"
 	var script_path := scripts_dir.path_join("record.ps1")
 	process_pid = OS.create_process("powershell.exe", [
 		"-ExecutionPolicy", "Bypass",
@@ -123,7 +123,7 @@ func _process(delta: float) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
-		if event.keycode == KEY_E and state == State.RECORDING:
+		if event.keycode == KEY_SPACE and state == State.RECORDING:
 			_kill_process()
 			_finish_recording()
 			get_viewport().set_input_as_handled()

@@ -16,6 +16,6 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 
 [display]
 
-window/size/viewport_width=420
-window/size/viewport_height=300
-window/size/resizable=false
+window/size/viewport_width=516
+window/size/viewport_height=396
+window/size/resizable=true
