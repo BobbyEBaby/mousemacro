@@ -8,6 +8,8 @@ enum State { IDLE, COUNTDOWN, RECORDING, PLAYING }
 @onready var events_label: Label = %EventsLabel
 @onready var countdown_label: Label = %CountdownLabel
 @onready var loop_check: CheckBox = %LoopCheck
+@onready var loop_count_check: CheckBox = %LoopCountCheck
+@onready var loop_count_spin: SpinBox = %LoopCountSpin
 
 var state: State = State.IDLE
 var process_pid: int = -1
@@ -69,21 +71,31 @@ func _start_recording() -> void:
 
 func _start_playback() -> void:
 	state = State.PLAYING
-	if loop_check.button_pressed:
+	var looping := loop_check.button_pressed
+	var limited := loop_count_check.button_pressed
+	var count := int(loop_count_spin.value)
+	if looping and limited:
+		status_label.text = "LOOPING x%d  (press Esc to stop)" % count
+	elif looping:
 		status_label.text = "LOOPING  (press Esc to stop)"
 	else:
 		status_label.text = "PLAYING  (press Esc to stop)"
 	record_btn.disabled = true
 	play_btn.disabled = true
 	loop_check.disabled = true
+	loop_count_check.disabled = true
+	loop_count_spin.editable = false
 	var script_path := scripts_dir.path_join("playback.ps1")
 	var args := [
 		"-ExecutionPolicy", "Bypass",
 		"-File", script_path,
 		"-InputFile", recording_file,
 	]
-	if loop_check.button_pressed:
+	if looping:
 		args.append("-Loop")
+		if limited:
+			args.append("-LoopCount")
+			args.append(str(count))
 	process_pid = OS.create_process("powershell.exe", args)
 	if process_pid == -1:
 		status_label.text = "ERROR: Could not start playback"
@@ -146,6 +158,8 @@ func _reset_to_idle() -> void:
 	record_btn.disabled = false
 	play_btn.disabled = false
 	loop_check.disabled = false
+	loop_count_check.disabled = false
+	loop_count_spin.editable = true
 	countdown_label.visible = false
 
 

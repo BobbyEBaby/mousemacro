@@ -1,7 +1,8 @@
 param(
     [Parameter(Mandatory=$true)]
     [string]$InputFile,
-    [switch]$Loop
+    [switch]$Loop,
+    [int]$LoopCount = 0
 )
 
 Add-Type @"
@@ -35,7 +36,10 @@ if ($lines.Count -eq 0) { exit }
 # Clear stale key state
 [MousePlayer]::GetAsyncKeyState([MousePlayer]::VK_ESCAPE) | Out-Null
 
+$iteration = 0
+
 do {
+    $iteration++
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
 
     foreach ($line in $lines) {
@@ -86,4 +90,7 @@ do {
     }
 
     $sw.Stop()
+
+    # If a finite loop count is set, stop after that many iterations
+    if ($LoopCount -gt 0 -and $iteration -ge $LoopCount) { break }
 } while ($Loop)

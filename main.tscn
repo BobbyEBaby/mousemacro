@@ -52,6 +52,28 @@ layout_mode = 2
 text = "Loop playback"
 alignment = 1
 
+[node name="LoopCountRow" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 8
+
+[node name="LoopCountCheck" type="CheckBox" parent="VBox/LoopCountRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Limit to"
+
+[node name="LoopCountSpin" type="SpinBox" parent="VBox/LoopCountRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(80, 0)
+min_value = 1.0
+max_value = 9999.0
+value = 1.0
+
+[node name="TimesLabel" type="Label" parent="VBox/LoopCountRow"]
+layout_mode = 2
+text = "loops"
+
 [node name="Sep2" type="HSeparator" parent="VBox"]
 layout_mode = 2
 
