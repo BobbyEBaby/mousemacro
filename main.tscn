@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://main.gd" id="1_main"]
+[ext_resource type="Theme" path="res://theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" path="res://assets/logo.svg" id="3_logo"]
 
 [node name="Main" type="MarginContainer"]
 anchors_preset = 15
@@ -8,104 +10,239 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 24
+theme = ExtResource("2_theme")
+theme_override_constants/margin_left = 28
 theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 26
 script = ExtResource("1_main")
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Title" type="Label" parent="VBox"]
+[node name="Header" type="HBoxContainer" parent="VBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Mouse Macro Recorder"
-horizontal_alignment = 1
+alignment = 1
+theme_override_constants/separation = 16
 
-[node name="Sep1" type="HSeparator" parent="VBox"]
+[node name="Logo" type="TextureRect" parent="VBox/Header"]
 layout_mode = 2
+custom_minimum_size = Vector2(80, 80)
+texture = ExtResource("3_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TitleBox" type="VBoxContainer" parent="VBox/Header"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Title1" type="Label" parent="VBox/Header/TitleBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Mouse & Keyboard"
+
+[node name="Title2" type="Label" parent="VBox/Header/TitleBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.878, 0.643, 0.345, 1)
+theme_override_font_sizes/font_size = 27
+text = "MACRO RECORDER"
 
 [node name="Buttons" type="HBoxContainer" parent="VBox"]
 layout_mode = 2
 alignment = 1
-theme_override_constants/separation = 24
+theme_override_constants/separation = 14
 
 [node name="RecordBtn" type="Button" parent="VBox/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(140, 44)
+custom_minimum_size = Vector2(130, 44)
 theme_override_font_sizes/font_size = 16
+theme_type_variation = &"RecordButton"
 text = "Record"
 
 [node name="PlayBtn" type="Button" parent="VBox/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(140, 44)
+custom_minimum_size = Vector2(130, 44)
 theme_override_font_sizes/font_size = 16
+theme_type_variation = &"AccentButton"
 text = "Play"
 
-[node name="LoopRow" type="HBoxContainer" parent="VBox"]
+[node name="LoopPanel" type="PanelContainer" parent="VBox"]
 layout_mode = 2
-alignment = 1
 
-[node name="LoopCheck" type="CheckBox" parent="VBox/LoopRow"]
+[node name="LoopCenter" type="CenterContainer" parent="VBox/LoopPanel"]
+layout_mode = 2
+
+[node name="LoopBox" type="VBoxContainer" parent="VBox/LoopPanel/LoopCenter"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="LoopCheck" type="CheckBox" parent="VBox/LoopPanel/LoopCenter/LoopBox"]
 unique_name_in_owner = true
 layout_mode = 2
+button_pressed = true
 text = "Loop playback"
 
-[node name="LoopCountRow" type="HBoxContainer" parent="VBox"]
+[node name="LoopCountRow" type="HBoxContainer" parent="VBox/LoopPanel/LoopCenter/LoopBox"]
 layout_mode = 2
-alignment = 1
 theme_override_constants/separation = 8
 
-[node name="LoopCountCheck" type="CheckBox" parent="VBox/LoopCountRow"]
+[node name="LoopCountCheck" type="CheckBox" parent="VBox/LoopPanel/LoopCenter/LoopBox/LoopCountRow"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Limit to"
 
-[node name="LoopCountSpin" type="SpinBox" parent="VBox/LoopCountRow"]
+[node name="LoopCountSpin" type="SpinBox" parent="VBox/LoopPanel/LoopCenter/LoopBox/LoopCountRow"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(80, 0)
+custom_minimum_size = Vector2(84, 0)
 min_value = 1.0
 max_value = 9999.0
 value = 1.0
 
-[node name="TimesLabel" type="Label" parent="VBox/LoopCountRow"]
+[node name="TimesLabel" type="Label" parent="VBox/LoopPanel/LoopCenter/LoopBox/LoopCountRow"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.553, 0.478, 1)
 text = "loops"
-
-[node name="Sep2" type="HSeparator" parent="VBox"]
-layout_mode = 2
 
 [node name="CountdownLabel" type="Label" parent="VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
-theme_override_font_sizes/font_size = 48
+theme_override_colors/font_color = Color(0.831, 0.349, 0.235, 1)
+theme_override_font_sizes/font_size = 46
 text = "3"
 horizontal_alignment = 1
 
 [node name="StatusLabel" type="Label" parent="VBox"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.553, 0.478, 1)
 theme_override_font_sizes/font_size = 15
-text = "Status: Idle"
+text = "Ready"
 horizontal_alignment = 1
 
 [node name="EventsLabel" type="Label" parent="VBox"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.553, 0.478, 1)
 text = "Events recorded: 0"
 horizontal_alignment = 1
 
-[node name="Sep3" type="HSeparator" parent="VBox"]
+[node name="KeysPanel" type="PanelContainer" parent="VBox"]
 layout_mode = 2
 
-[node name="HotkeyLabel" type="Label" parent="VBox"]
+[node name="KeysCenter" type="CenterContainer" parent="VBox/KeysPanel"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.65, 0.65, 0.65, 1)
-text = "Space = Stop Recording   |   Esc = Stop Playback"
+
+[node name="KeysGrid" type="GridContainer" parent="VBox/KeysPanel/KeysCenter"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 14
+theme_override_constants/v_separation = 8
+
+[node name="StopRecordLabel" type="Label" parent="VBox/KeysPanel/KeysCenter/KeysGrid"]
+layout_mode = 2
+text = "Stop recording key:"
+
+[node name="StopRecordBtn" type="Button" parent="VBox/KeysPanel/KeysCenter/KeysGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(110, 0)
+text = "Space"
+
+[node name="StopPlayLabel" type="Label" parent="VBox/KeysPanel/KeysCenter/KeysGrid"]
+layout_mode = 2
+text = "Stop playback key:"
+
+[node name="StopPlayBtn" type="Button" parent="VBox/KeysPanel/KeysCenter/KeysGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(110, 0)
+text = "Escape"
+
+[node name="HotkeyLabel" type="Label" parent="VBox/KeysPanel/KeysCenter/KeysGrid"]
+layout_mode = 2
+text = "Set Hotkey to Start:"
+
+[node name="HotkeyBtn" type="Button" parent="VBox/KeysPanel/KeysCenter/KeysGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(110, 0)
+text = "None"
+
+[node name="BottomSpacer" type="Control" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 8)
+
+[node name="CigarLabel" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.878, 0.643, 0.345, 1)
+theme_override_font_sizes/font_size = 17
+text = "Buy me a cigar"
 horizontal_alignment = 1
+
+[node name="DonateCenter" type="CenterContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="DonateGrid" type="GridContainer" parent="VBox/DonateCenter"]
+layout_mode = 2
+columns = 3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 6
+
+[node name="BtcLabel" type="Label" parent="VBox/DonateCenter/DonateGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788, 0.561, 0.271, 1)
+theme_override_font_sizes/font_size = 12
+text = "BTC"
+
+[node name="BtcAddr" type="Label" parent="VBox/DonateCenter/DonateGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.553, 0.478, 1)
+theme_override_font_sizes/font_size = 12
+text = "3JiaPsUmdf2pqXFrDavzQ4fRpkJSVg5BbH"
+
+[node name="BtcCopyBtn" type="Button" parent="VBox/DonateCenter/DonateGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Copy"
+
+[node name="DogeLabel" type="Label" parent="VBox/DonateCenter/DonateGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788, 0.561, 0.271, 1)
+theme_override_font_sizes/font_size = 12
+text = "DOGE"
+
+[node name="DogeAddr" type="Label" parent="VBox/DonateCenter/DonateGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.553, 0.478, 1)
+theme_override_font_sizes/font_size = 12
+text = "DUJPtjifrXtiykXcN389Gw36g5T9ZpWvgZ"
+
+[node name="DogeCopyBtn" type="Button" parent="VBox/DonateCenter/DonateGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Copy"
+
+[node name="ZecLabel" type="Label" parent="VBox/DonateCenter/DonateGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788, 0.561, 0.271, 1)
+theme_override_font_sizes/font_size = 12
+text = "ZEC"
+
+[node name="ZecAddr" type="Label" parent="VBox/DonateCenter/DonateGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.553, 0.478, 1)
+theme_override_font_sizes/font_size = 12
+text = "t1fsoScTMB1ERNjVrsS1CpvrVYLVzSECHSc"
+
+[node name="ZecCopyBtn" type="Button" parent="VBox/DonateCenter/DonateGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Copy"

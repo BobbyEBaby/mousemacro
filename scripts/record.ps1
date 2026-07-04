@@ -1,6 +1,7 @@
 param(
     [Parameter(Mandatory=$true)]
-    [string]$OutputFile
+    [string]$OutputFile,
+    [int]$StopVK = 0x20
 )
 
 Add-Type @"
@@ -37,12 +38,12 @@ $prevRight = $false
 $prevMiddle = $false
 
 # Clear any stale key state
-[MouseRecorder]::GetAsyncKeyState([MouseRecorder]::VK_SPACE) | Out-Null
+[MouseRecorder]::GetAsyncKeyState($StopVK) | Out-Null
 
 while ($true) {
-    # Check for E key to stop
-    $eState = [MouseRecorder]::GetAsyncKeyState([MouseRecorder]::VK_SPACE)
-    if ($eState -band 0x8000) { break }
+    # Check for the stop key
+    $stopState = [MouseRecorder]::GetAsyncKeyState($StopVK)
+    if ($stopState -band 0x8000) { break }
 
     $point = New-Object MouseRecorder+POINT
     [MouseRecorder]::GetCursorPos([ref]$point) | Out-Null

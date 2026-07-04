@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- shoulders / jacket -->
+  <path d="M100 512 C 118 442 178 416 250 416 C 322 416 382 442 400 512 Z" fill="#382e23"/>
+  <!-- shirt -->
+  <path d="M206 430 L250 500 L294 430 L294 512 L206 512 Z" fill="#ece2d0"/>
+  <path d="M206 430 L250 500 L294 430 L282 424 L250 472 L218 424 Z" fill="#d8cabc"/>
+  <!-- neck -->
+  <rect x="228" y="380" width="44" height="52" rx="12" fill="#e9bd8f"/>
+  <rect x="228" y="380" width="44" height="18" fill="#d1a274"/>
+  <!-- ears -->
+  <circle cx="149" cy="312" r="17" fill="#e9bd8f"/>
+  <circle cx="351" cy="312" r="17" fill="#e9bd8f"/>
+  <!-- head -->
+  <ellipse cx="250" cy="300" rx="102" ry="110" fill="#e9bd8f"/>
+  <!-- right-side face shading -->
+  <path d="M312 218 C 344 252 352 330 316 378 C 344 344 352 262 336 232 Z" fill="#c98f66" opacity="0.35"/>
+  <!-- fedora -->
+  <g transform="rotate(-5 250 210)">
+    <ellipse cx="250" cy="220" rx="158" ry="36" fill="#3d2b1f"/>
+    <path d="M92 220 A 158 36 0 0 0 408 220 L 408 214 A 158 36 0 0 1 92 214 Z" fill="#33241a"/>
+    <path d="M152 222 C 148 150 192 112 250 112 C 308 112 352 150 356 222 Z" fill="#55402e"/>
+    <path d="M250 112 C 240 150 240 190 246 222 L 256 222 C 262 190 262 150 250 112 Z" fill="#483626" opacity="0.8"/>
+    <rect x="150" y="192" width="204" height="30" rx="6" fill="#e0a458"/>
+    <rect x="150" y="214" width="204" height="8" rx="4" fill="#c98f45"/>
+  </g>
+  <!-- sunglasses -->
+  <rect x="163" y="282" width="82" height="46" rx="15" fill="#171310"/>
+  <rect x="255" y="282" width="82" height="46" rx="15" fill="#171310"/>
+  <rect x="240" y="296" width="20" height="9" rx="4" fill="#171310"/>
+  <path d="M166 300 L150 306" stroke="#171310" stroke-width="9" stroke-linecap="round"/>
+  <path d="M334 300 L350 306" stroke="#171310" stroke-width="9" stroke-linecap="round"/>
+  <path d="M176 294 L200 316" stroke="#ffffff" stroke-width="7" stroke-linecap="round" opacity="0.22"/>
+  <path d="M268 294 L292 316" stroke="#ffffff" stroke-width="7" stroke-linecap="round" opacity="0.22"/>
+  <!-- nose -->
+  <path d="M250 316 C 254 328 256 336 250 342" fill="none" stroke="#d1a274" stroke-width="8" stroke-linecap="round"/>
+  <!-- confident smirk -->
+  <path d="M204 364 Q 252 390 304 362" fill="none" stroke="#7a4a2e" stroke-width="9" stroke-linecap="round"/>
+  <!-- cigar -->
+  <g transform="rotate(-8 320 358)">
+    <rect x="312" y="344" width="108" height="28" rx="13" fill="#8b5a33"/>
+    <path d="M336 344 C 340 354 340 362 336 372" fill="none" stroke="#6f4526" stroke-width="4"/>
+    <path d="M394 344 C 398 354 398 362 394 372" fill="none" stroke="#6f4526" stroke-width="4"/>
+    <rect x="352" y="344" width="20" height="28" fill="#e0a458"/>
+    <circle cx="362" cy="358" r="6" fill="#b03a2e"/>
+    <rect x="414" y="346" width="14" height="24" rx="6" fill="#b8b0a4"/>
+    <circle cx="430" cy="358" r="10" fill="#e25822"/>
+    <circle cx="430" cy="358" r="5" fill="#ffb347"/>
+  </g>
+  <!-- smoke -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M436 330 C 454 304 424 284 444 258 C 462 234 438 214 452 190" stroke="#d8cfc0" stroke-width="11" opacity="0.5"/>
+    <path d="M448 318 C 462 298 446 280 460 258 C 472 240 460 224 468 208" stroke="#d8cfc0" stroke-width="7" opacity="0.32"/>
+    <path d="M424 314 C 436 298 422 284 432 266" stroke="#d8cfc0" stroke-width="6" opacity="0.25"/>
+  </g>
+</svg>

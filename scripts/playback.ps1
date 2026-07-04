@@ -2,7 +2,9 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$InputFile,
     [switch]$Loop,
-    [int]$LoopCount = 0
+    [int]$LoopCount = 0,
+    [int]$StopVK = 0x1B,
+    [string]$ProgressFile = ""
 )
 
 Add-Type @"
@@ -34,12 +36,15 @@ $lines = [System.IO.File]::ReadAllLines($InputFile)
 if ($lines.Count -eq 0) { exit }
 
 # Clear stale key state
-[MousePlayer]::GetAsyncKeyState([MousePlayer]::VK_ESCAPE) | Out-Null
+[MousePlayer]::GetAsyncKeyState($StopVK) | Out-Null
 
 $iteration = 0
 
 do {
     $iteration++
+    if ($ProgressFile -ne "") {
+        [System.IO.File]::WriteAllText($ProgressFile, "$iteration")
+    }
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
 
     foreach ($line in $lines) {
@@ -51,9 +56,9 @@ do {
         $x          = [int]$parts[2]
         $y          = [int]$parts[3]
 
-        # Wait until the target timestamp, checking for Escape
+        # Wait until the target timestamp, checking for the stop key
         while ($sw.ElapsedMilliseconds -lt $targetTime) {
-            if ([MousePlayer]::GetAsyncKeyState([MousePlayer]::VK_ESCAPE) -band 0x8000) { exit }
+            if ([MousePlayer]::GetAsyncKeyState($StopVK) -band 0x8000) { exit }
             [System.Threading.Thread]::Sleep(1)
         }
 

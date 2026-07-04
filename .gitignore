@@ -4,6 +4,12 @@
 
 # Recordings
 recording.csv
+*.translation
+playback_progress.txt
+
+# Build output
+build/
+assets/icon_*.png
 
 # Claude
 .claude/
